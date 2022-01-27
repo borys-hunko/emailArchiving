@@ -1,10 +1,21 @@
 package com.hunko.email.dao.filter;
 
-import java.util.Set;
-
+/**
+ * class creating filter
+ * <p>
+ * there are 3 types of tokens in filter:
+ * conditional e.g. a=b, a>b etc.
+ * combine tokens e.g. and, or
+ * not token which negates next statement
+ * <p>
+ * conditional statement can be inserted in empty query, after combine token and after not token
+ * combine token can be placed after conditional
+ * not token can be placed in the beginning or after combine token
+ */
 public interface FilterBuilder {
     /**
      * creates filter
+     * can be built if last token is conditional
      *
      * @return built filter
      */
@@ -16,79 +27,16 @@ public interface FilterBuilder {
     FilterBuilder clear();
 
     /**
-     * negate next statement
+     * combine token, logical and
      *
-     * @return this FilterBuilder
+     * @return this FilterToken
      */
-    FilterBuilder not();
+    FilterBuilder and(FilterToken condition);
 
     /**
-     * logical and
+     * combine token, logical or
      *
-     * @return this FilterBuilder
+     * @return this FilterToken
      */
-    FilterBuilder and();
-
-    /**
-     * logical or
-     *
-     * @return this FilterBuilder
-     */
-    FilterBuilder or();
-
-    /**
-     * define if attribute is in contained in collection
-     *
-     * @param key    name of attribute
-     * @param values set of values for comparison
-     * @return this FilterBuilder
-     */
-    FilterBuilder in(String key, Set<String> values);
-
-    /**
-     * define if attribute of key is equal val
-     *
-     * @param key name of attribute
-     * @param val value which to which attributes value is compared
-     * @return this FilterBuilder
-     */
-    FilterBuilder eq(String key, String val);
-
-    /**
-     * define if attribute of key is greater than val
-     *
-     * @param key name of attribute
-     * @param val value which to which attributes value is compared
-     * @return this FilterBuilder
-     */
-    FilterBuilder greaterThan(String key, String val);
-
-    /**
-     * define if attribute of key is less than val
-     *
-     * @param key name of attribute
-     * @param val value which to which attributes value is compared
-     * @return this FilterBuilder
-     */
-    FilterBuilder lessThan(String key, String val);
-
-    /**
-     * define if attribute of key is between from and to
-     *
-     * @param key  name of attribute
-     * @param from minimum value
-     * @param to   maximum value
-     * @return this FilterBuilder
-     */
-    FilterBuilder between(String key, String from, String to);
-
-    /**
-     * define if string attribute of key is like value
-     *
-     * @param key           name of attribute
-     * @param val           value which to which attributes value is compared
-     * @param caseSensitive if comparing is case-sensitive
-     * @return this FilterBuilder
-     */
-    FilterBuilder like(String key, String val, boolean caseSensitive);
+    FilterBuilder or(FilterToken condition);
 }
