@@ -16,7 +16,7 @@ public interface Dao<I, V> {
      * @param id identifier of object stored in database
      * @return objet stored in db or null if not found
      * @throws com.hunko.email.exceptions.InternalDatabaseException if there is server side bug
-     * @throws NullPointerException                                 if id is null
+     * @throws IllegalArgumentException                             if id is null
      */
     V get(I id);
 
@@ -24,7 +24,7 @@ public interface Dao<I, V> {
      * add instance to database at set new id to added instance
      *
      * @param instance add instance to db
-     * @throws NullPointerException                                 if passed instance is null
+     * @throws IllegalArgumentException                             if passed instance is null
      * @throws com.hunko.email.exceptions.NonUniqueElementException if passes object is not unique(if it must be)
      * @throws com.hunko.email.exceptions.NullAttributeException    if NOT NULL field are null
      * @throws com.hunko.email.exceptions.InternalDatabaseException if there is server side bug
@@ -35,7 +35,7 @@ public interface Dao<I, V> {
      * update stored instance with id of passed object in database
      *
      * @param newInstance updated instance of object
-     * @throws NullPointerException                                 if passed instance is null
+     * @throws IllegalArgumentException                             if passed instance is null
      * @throws com.hunko.email.exceptions.NonUniqueElementException if passes object is not unique(if it must be)
      * @throws com.hunko.email.exceptions.NullAttributeException    if NOT NULL field are null
      * @throws com.hunko.email.exceptions.InternalDatabaseException if there is server side bug
@@ -46,41 +46,32 @@ public interface Dao<I, V> {
      * delete object with specified id
      *
      * @param id identifier
-     * @throws NullPointerException                                 if passed id is null
-     * @throws com.hunko.email.exceptions.NoSuchElementException    if there is no object with such id
+     * @throws IllegalArgumentException                             if passed id is null
      * @throws com.hunko.email.exceptions.InternalDatabaseException if there is server side bug
      */
     boolean delete(I id);
 
-    /**
-     * return all object from db
-     *
-     * @return list of all objects in db
-     * @throws com.hunko.email.exceptions.InternalDatabaseException if there is server side bug
-     */
-    List<V> getAll();
-
-    /**
-     * returns list of all object in specified order
-     *
-     * @param comparator condition of sorting
-     * @return list of all object in specified order
-     */
-    List<V> getAll(Comparator<V> comparator);
-
-    /**
-     * returns $limit object for page number sorted in chosen way
-     * if there is no element on given page returns empty list
-     * if limit is bigger than number of object on page returns all found objects
-     *
-     * @param limit      number of object to return
-     * @param pageNumber number of page
-     * @param comparator condition of sorting
-     * @return all objects for passed page in chosen order
-     * @throws NullPointerException                                 if one of passed elements is null
-     * @throws com.hunko.email.exceptions.InternalDatabaseException if there is server side bug
-     */
-    List<V> getAllPaged(int limit, int pageNumber, Comparator<V> comparator);
+//    /**
+//     * return all object from db
+//     *
+//     * @return list of all objects in db
+//     * @throws com.hunko.email.exceptions.InternalDatabaseException if there is server side bug
+//     */
+//    List<V> getAll();
+//
+//    /**
+//     * returns $limit object for page number sorted in chosen way
+//     * if there is no element on given page returns empty list
+//     * if limit is bigger than number of object on page returns all found objects
+//     *
+//     * @param limit      number of object to return
+//     * @param pageNumber number of page
+//     * @param comparator condition of sorting
+//     * @return all objects for passed page in chosen order
+//     * @throws NullPointerException                                 if one of passed elements is null
+//     * @throws com.hunko.email.exceptions.InternalDatabaseException if there is server side bug
+//     */
+//    List<V> getAllPaged(int limit, int pageNumber);
 
 //    public static boolean main(String[] args) {
 //        Configuration configuration = new Configuration().configure();

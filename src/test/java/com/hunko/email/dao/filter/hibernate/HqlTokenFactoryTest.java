@@ -16,9 +16,13 @@ class HqlTokenFactoryTest {
     public static final String VAL_SET_STR = "('val1', 'val2', 'val3')";
     private static final String EQUAL = "=";
     private static final int NUM_VAL = 312;
+    private static final int BIGGER_VAL = 100;
+    private static final int SMALLER_VAL = 0;
     public static final String KEY_EQUAL_VAL = KEY + EQUAL + STRING_VAL;
     private static final String IN = "in";
     private static final String NOT = "not";
+    private static final String AND = "and";
+    private static final String BETWEEN = "between";
     private static final String GREATER_THAN = ">";
     private static final String LESS_THAN = "<";
     private static final Set<Object> VLA_SET = Set.of("val1", "val2", "val3");
@@ -28,7 +32,7 @@ class HqlTokenFactoryTest {
     private static final String KEY_GREATER_THAN = KEY + GREATER_THAN + NUM_VAL;
     private static final String KEY_LESS_THAN = KEY + LESS_THAN + NUM_VAL;
     private static final String KEY_GREATER_OR_EQUAL_THAN = KEY + GREATER_THAN + EQUAL + NUM_VAL;
-    private static final String KEY_LESS_EQUAL_THAN = KEY + LESS_THAN + EQUAL + NUM_VAL;
+    private static final String KEY_LESS_OR_EQUAL_THAN = KEY + LESS_THAN + EQUAL + NUM_VAL;
 
     HqlTokenFactory factory;
 
@@ -76,17 +80,18 @@ class HqlTokenFactoryTest {
     @Test
     void testGreaterOrEqual() {
         FilterToken filterToken = factory.greaterThan(KEY, NUM_VAL);
-        assertEquals(KEY_GREATER_THAN, filterToken.value());
+        assertEquals(KEY_GREATER_OR_EQUAL_THAN, filterToken.value());
     }
 
     @Test
     void testLessOrEqual() {
         FilterToken filterToken = factory.lessThan(KEY, NUM_VAL);
-        assertEquals(KEY_LESS_THAN, filterToken.value());
+        assertEquals(KEY_LESS_OR_EQUAL_THAN, filterToken.value());
     }
 
     @Test
-    void between() {
+    void betweenWithCorrectRange() {
+
     }
 
     @Test
